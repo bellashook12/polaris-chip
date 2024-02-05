@@ -15,6 +15,8 @@ export class MyCard extends LitElement {
   constructor() {
     super();
     this.title = "Welcome";
+    this.buttontitle = "Details";
+    this.paragraph = "One of Penn State's logos"
   }
 
 
@@ -98,11 +100,11 @@ img{
     <div class="card-background">
       <h1 class="card-title">${this.title}</h1>
       <img class="card-image" src="https://www.computersciencedegreehub.com/wp-content/uploads/2019/07/pennsylvania-state-university-300x296.png" alt="penn state logo">
-      <p>One of Penn State's logos</p>
+      <p>${this.paragraph}</p>
 
       <div class="btn-things">
           <a href="https://hax.psu.edu">
-            <button class="btn">Details</button>
+            <button class="btn">${this.buttontitle}</button>
           </a>
       <div class="control-wrapper">
     <button class="duplicate">Clone Card</button>
@@ -122,6 +124,10 @@ img{
   static get properties() {
     return {
       title: { type: String },
+      buttontitle: { type: String },
+      paragraph: { type: String },
+
+
     };
   }
 }
