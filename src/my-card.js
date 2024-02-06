@@ -17,6 +17,7 @@ export class MyCard extends LitElement {
     this.title = "Welcome";
     this.buttontitle = "Details";
     this.paragraph = "One of Penn State's logos"
+    this.img = "https://www.computersciencedegreehub.com/wp-content/uploads/2019/07/pennsylvania-state-university-300x296.png"
   }
 
 
@@ -25,8 +26,6 @@ export class MyCard extends LitElement {
       :host {
         display: block;
       }
-
-
 
   .card-background{
     background-color: lightblue;
@@ -94,12 +93,11 @@ img{
 
   `;
   }
-
   render() {
     return html`
     <div class="card-background">
       <h1 class="card-title">${this.title}</h1>
-      <img class="card-image" src="https://www.computersciencedegreehub.com/wp-content/uploads/2019/07/pennsylvania-state-university-300x296.png" alt="penn state logo">
+      <img class="card-image" src=${this.img} alt="penn state logo">
       <p>${this.paragraph}</p>
 
       <div class="btn-things">
@@ -108,7 +106,7 @@ img{
           </a>
       <div class="control-wrapper">
     <button class="duplicate">Clone Card</button>
-    <button id="changetitle">Change title</button>
+    <button id="changetitle">Change title</button>  
     <button id="changeimage">Change image</button>
     <button id="changebg">Change background</button>
     <button id="delete">Delete card</button>
@@ -119,17 +117,20 @@ img{
     `;
 
   }
-
+//i think button class instead of id 
+//put buttons on in index.html - not in card i think 
 
   static get properties() {
     return {
       title: { type: String },
       buttontitle: { type: String },
       paragraph: { type: String },
-
+      img: { type: String },
 
     };
   }
 }
 
 globalThis.customElements.define(MyCard.tag, MyCard);
+
+//<img class="card-image" src=${this.img} alt="penn state logo">
