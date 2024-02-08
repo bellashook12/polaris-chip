@@ -18,7 +18,10 @@ export class MyCard extends LitElement {
     this.buttontitle = "Details";
     this.paragraph = "One of Penn State's logos"
     this.img = "https://www.computersciencedegreehub.com/wp-content/uploads/2019/07/pennsylvania-state-university-300x296.png"
+    this.fancy = false;
   }
+
+
 
 
   static get styles() {
@@ -91,26 +94,71 @@ img{
   }
 }
 
+    :host([fancy]) {
+    display: block;
+      background-color: navy;
+      border: 2px solid aqua;
+      box-shadow: 10px 5px 5px blue;
+    }
+
+    details summary {
+    text-align: left;
+    font-size: 20px;
+    padding: 8px 0;
+  }
+
+  details[open] summary {
+    font-weight: bold;
+  }
+  
+  details div {
+    border: 2px solid black;
+    text-align: left;
+    padding: 8px;
+    height: 70px;
+    overflow: auto;
+  }
+
+
+
+
   `;
   }
+
+
+  openChanged(e) {
+    console.log(e.newState);
+    if (e.newState === "open") {
+      this.fancy = true;
+    }
+    else {
+      this.fancy = false;
+    }
+  }
+
+
+  //<slot>${this.paragraph}</slot>
   render() {
     return html`
+    
     <div class="card-background">
       <h1 class="card-title">${this.title}</h1>
       <img class="card-image" src=${this.img} alt="penn state logo">
       <p>${this.paragraph}</p>
-
+      
+      <details ?open="${this.fancy}" @toggle="${this.openChanged}">
+        <summary>Description</summary>
+        <div>
+          <slot><p>${this.paragraph}</p></slot>
+        </div>
+      </details>
+      
+      
+      
       <div class="btn-things">
           <a href="https://hax.psu.edu">
             <button class="btn">${this.buttontitle}</button>
           </a>
-      <div class="control-wrapper">
-    <button class="duplicate">Clone Card</button>
-    <button id="changetitle">Change title</button>  
-    <button id="changeimage">Change image</button>
-    <button id="changebg">Change background</button>
-    <button id="delete">Delete card</button>
-    </div>
     </div>
     </div> 
   
@@ -126,11 +174,19 @@ img{
       buttontitle: { type: String },
       paragraph: { type: String },
       img: { type: String },
+      fancy: { type: Boolean, reflect: true },
 
     };
   }
 }
 
 globalThis.customElements.define(MyCard.tag, MyCard);
+
+//document.querySelector('.duplicate').addEventListener('click', function(event) {
+  //const mycards=document.querySelectorAll('my-card');
+  //mycards.forEach(function(card){
+    //card.title="new Title";
+ // })
+//})
 
 //<img class="card-image" src=${this.img} alt="penn state logo">

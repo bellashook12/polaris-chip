@@ -35,7 +35,15 @@
   <polaris-chip title="Cool"></polaris-chip>
 
   <h1>my-card</h1>
-  <my-card buttontitle = "hello" paragraph = "OLD LOGO" ></my-card>
+  <div class="control-wrapper">
+    <button class="duplicate">Clone Card</button>
+    <button class="changetitle">Change title</button>  
+    <button class="changeimage">Change image</button>
+    <button class="changebg">Change background</button>
+    <button class="delete">Delete card</button>
+    </div>
+
+  <my-card buttontitle = "hello" paragraph = "cool stuff as content here"></my-card>
   <my-card title = "new title" buttontitle = "new button" paragraph = "pretty picture"></my-card>
   <my-card title ="welcome welcome" buttontitle = "button button" paragraph = "picture picture"></my-card>
   <my-card title = "HELLO" buttontitle = "click me!"></my-card>
@@ -44,6 +52,41 @@
   <!-- this is what is bringing in the definition for this tag -->
   <script type="module" src="./src/polaris-chip.js"></script>
   <script type="module" src="./src/my-card.js"></script>
-</body>
 
+  <script>
+    document.querySelector('.duplicate').addEventListener('click', function(event) {
+      const mycards=document.querySelectorAll('my-card');
+      mycards.forEach(function(card){
+        card.title="new Title";
+      })
+      
+      if (document.querySelectorAll('.card').length < 10) {
+      const newCard = document.querySelector('#cardlist .card').cloneNode(true);
+      document.querySelector('#cardlist').appendChild(newCard);
+    }
+  });
+
+    document.querySelector('#changetitle').addEventListener('click', function(e) {
+    document.querySelector('.card-title').innerHTML = "Hello PSU";
+  })
+
+    document.querySelector('#changeimage').addEventListener('click', function(e) {
+    document.querySelector('.card-image').src = "https://github.com/elmsln.png";
+  })
+
+    document.querySelector('#changebg').addEventListener('click', function(e) {
+    document.querySelector('.card-background').classList.toggle('change-color');
+  })
+
+  document.querySelector('#delete').addEventListener('click', function(event) {
+  const cards = document.querySelectorAll(".card");
+  
+    if(cards.length > 1){
+      cards[1].remove();
+    }
+  });
+
+</script>
+
+</body>
 </html>
