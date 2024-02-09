@@ -66,13 +66,30 @@
     }
   });
 
-    document.querySelector('#changetitle').addEventListener('click', function(e) {
-    document.querySelector('.card-title').innerHTML = "Hello PSU";
-  })
+    document.querySelector('.changetitle').addEventListener('click', function(e) {
+      const mycards=document.querySelectorAll('my-card');
+      mycards.forEach(function(card){
+      card.title="new new new";
 
-    document.querySelector('#changeimage').addEventListener('click', function(e) {
-    document.querySelector('.card-image').src = "https://github.com/elmsln.png";
-  })
+  })      
+})
+
+document.querySelector('.changeimage').addEventListener('click', function(e) {
+      const mycards=document.querySelectorAll('my-card');
+      mycards.forEach(function(card){
+      img="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRPgSRgEYJ3lY8Ky8wNqfoJqWe2U2VMe-RIKbO_0HSXGj5sHA-_";
+
+    })      
+});
+
+
+document.querySelector('.changebg').addEventListener('click', function(e) {
+      const mycards=document.querySelectorAll('my-card');
+      mycards.forEach(function(card){
+      ('.card-background').classList.toggle('change-color');document.querySelector('.card-background').classList.toggle('change-color');
+
+  })      
+})
 
     document.querySelector('#changebg').addEventListener('click', function(e) {
     document.querySelector('.card-background').classList.toggle('change-color');
@@ -89,4 +106,4 @@
 </script>
 
 </body>
-</html>
+</html> 

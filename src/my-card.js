@@ -143,7 +143,7 @@ img{
     
     <div class="card-background">
       <h1 class="card-title">${this.title}</h1>
-      <img class="card-image" src=${this.img} alt="penn state logo">
+      <img class="card.image" src=${this.img} alt="penn state logo">
       <p>${this.paragraph}</p>
       
       <details ?open="${this.fancy}" @toggle="${this.openChanged}">
