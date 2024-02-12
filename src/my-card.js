@@ -46,7 +46,7 @@ export class MyCard extends LitElement {
   }
 
   .change-color{
-  background-color:blue !important;
+  background-color:red !important;
 }
 
 .btn:focus,
@@ -119,9 +119,6 @@ img{
     overflow: auto;
   }
 
-
-
-
   `;
   }
 
@@ -182,11 +179,3 @@ img{
 
 globalThis.customElements.define(MyCard.tag, MyCard);
 
-//document.querySelector('.duplicate').addEventListener('click', function(event) {
-  //const mycards=document.querySelectorAll('my-card');
-  //mycards.forEach(function(card){
-    //card.title="new Title";
- // })
-//})
-
-//<img class="card-image" src=${this.img} alt="penn state logo">
