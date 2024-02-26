@@ -8,7 +8,7 @@ export class BannerApp extends LitElement {
   
   constructor() {
     super();
-    this.counter = 5;
+    
   }
 
   static get styles() {
@@ -17,18 +17,25 @@ export class BannerApp extends LitElement {
         display: block;
       }
 
-      .wrapper{
-        background-color: blue;
-      }
+       .wrapper{
+        min-height: 100vh;
+        
+      } 
 
       .banner{
-        position: relative;
-        width: 100%;
-        height: 10vh;
-        
-    
 
+        width: 100%;
+        height: 20vh;
+        position: sticky;
+        top: 0px;
+        background-color: blue;
       }
+      
+      p{
+        color:white;
+      }
+
+      
        
 
   `;
@@ -39,6 +46,7 @@ export class BannerApp extends LitElement {
     return html`
     <div class="wrapper">
         <div class="banner">
+        <p> trial</p>
   
   
   
@@ -55,8 +63,7 @@ export class BannerApp extends LitElement {
   static get properties() {
     return {
       counter: { type: Number, reflect: true },
-      min: {type: Number },
-      max: {type: Number },
+    
     };
   }
 }
