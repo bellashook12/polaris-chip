@@ -12,8 +12,7 @@ export class BannerApp extends LitElement {
     this.status = "notice";
     this.date = "NOVEMBER 17, 2023 12:00 AM";
     this.opened = true;
-    this.message = "";
-    
+    this.message = "something";
     
   }
 
@@ -23,10 +22,12 @@ export class BannerApp extends LitElement {
         display: flex;
         --display-mode: unset;
         --display-mode-opposite: none;
-        --min-banner-height: 20vh;
+        --min-banner-height: 30px;
         min-height: var(--min-banner-height);
-        
-
+        overflow: hidden;
+        --inside-color: #378683;
+        flex-direction: column;
+      
       }
 
        :host([sticky]) {
@@ -36,39 +37,131 @@ export class BannerApp extends LitElement {
       } 
 
       :host([status = "notice"]) {
-        --background-color: blue;
+        --background-color: #CFECEB;
+        --inside-color: #FFFFFF;
         
       }
 
       :host([status = "warning"]) {
         --background-color: #bf8226;
-        
+        --inside-color: #FAC230;
+
       }
 
       :host([status ="alert"]) {
         --background-color:#c0250d;
-        
+        --inside-color: #e9453f;
+         
       }
 
 
       .maincontainer{
         width: 100%;
-        height: 150px;
-        top: 0px;
+        //height: 30px;
+        //top: 0px;
         background-color: var(--background-color);
         border: 8px;
         margin: 8px;
+        display: inline flex;
+       // position: relative;
+        //justify-content: center;
+        //align-items: center;
+        flex-direction: column;
+        min-height: var(--min-banner-height);
+        
+    
       }
 
       .date {
         color: white;
+        margin-left: 16px;
+        padding: 16px;
+        display: var(--display-mode);
+        font-weight: bold;
+
+        
       }
 
-     
 
-      
-      
+      .infoContainer{
+        background-color: var(--inside-color);
+        width: 90%;
+       // height: 100px;
+        //text-align: left;
+        transform: skew(20deg);
+        justify-content: space-between;
+        display: flex;
+        flex-direction: column;
+        //align-items: center;
+        //position: relative;
+        align-items: flex-start;
+        display: var(--display-mode);
+        margin: -5px 20px 0px 20px;
+        
+        
+      }
+
+      .infoinside{
+        transform: skew(-20deg);
+        font-weight: bold;
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+
+      }
+
+      .exclamation{
+        margin-top: 24px;
        
+      }
+
+      .messageInfo{
+        align-items: left;
+        top: 0px;
+        padding: 24px;
+        display: flex;
+        width: 100%;
+        box-sizing: border-box;
+        margin-left: 24px;
+        
+      }
+
+      .closeit button{
+        
+        background-color: transparent;
+        border: none;
+        display: var(--display-mode);
+        color: white; 
+        font-weight: bold;
+        margin-left:auto;
+  
+      }
+
+      .opencontainer{
+        display: var(--display-mode-opposite);
+      }
+      
+      .openit button{
+        background-color: var(--background-color);
+        border: none;
+        color: black;
+        font-weight: bold;
+        font-size: 20px;
+        padding: 8px;
+        position: relative;
+        
+      }
+      
+
+      .header{
+        width: 90%;
+        justify-content: space-between;
+        align-items: center;
+        margin: 8px;
+        display: flex;
+        padding: 6px 6px 0px 6px;
+      }
+      
   `;
   }
 
@@ -79,15 +172,23 @@ export class BannerApp extends LitElement {
     <div class= "maincontainer">
       <div class="opencontainer">
         <span class="openit">
-          <button id="openthis" @click="${this.openAll}"> TEST CAMPUS ALERT </button>
+          <button class="openthis" @click="${this.openAll}"> TEST CAMPUS ALERT  V </button>
           </span>
           </div>
-
+          
+          <div class =" header">
           <div class = "date">
             ${this.date}
           </div>
+          <span class= "closeit">
+            <button id="closethis" @click="${this.closeAll}">✕ Close</button>
+  </span>
+  </div>
 
-    
+          <div class = "infoContainer">
+            <div class ="infoinside">
+
+            <div class ="exclamation">
           <svg height ="32px" width ="32px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 84 84" class="alert-icon">
             <g transform="translate(-350.099 -428.714)">
               <g transform="translate(350.099 428.714)" fill="none" stroke-width="6">
@@ -100,17 +201,15 @@ export class BannerApp extends LitElement {
               </g>
             </g>
           </svg>
+          </div>
         
           <div class = "messageInfo" >
           ${this.message}
           </div>
-
-          <span class= "closeit">
-            <button id="closethis" @click="${this.closeAll}">✕ Close</button>
-  </span>
-
-
-
+          </div>
+          </div>
+          </div>
+          
 
 
     </div>
@@ -124,17 +223,19 @@ export class BannerApp extends LitElement {
     this.opened= true;
     console.log("opened");
     this.style.setProperty('--display-mode', 'unset');
+    this.style.setProperty('--min-banner-height', '30px');
     this.style.setProperty('--display-mode-opposite', 'none');
-    this.style.setProperty('--min-banner-height', '20vh');
   }
 
   closeAll(){
     this.opened= false;
     console.log("closed");
     this.style.setProperty('--display-mode', 'none');
-    this.style.setProperty('--display-mode-opposite', 'none');
-    this.style.setProperty('--min-banner-height', '6vh');
+    this.style.setProperty('--min-banner-height', '30px');
+    this.style.setProperty('--display-mode-opposite', 'flex');
+  
   }
+
   
   
 
