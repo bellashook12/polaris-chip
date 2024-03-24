@@ -1,11 +1,9 @@
 import { LitElement, html, css } from 'lit';
-import { DDD } from "@lrnwebcomponents/d-d-d/d-d-d.js";
 
-
-  export class PartyUi extends DDD {
+export class PartyUI extends LitElement {
 
   static get tag() {
-    return 'Party-Ui';
+    return 'party-ui';
   }
   
   constructor() {
@@ -13,17 +11,32 @@ import { DDD } from "@lrnwebcomponents/d-d-d/d-d-d.js";
    
   }
 
+
   static get styles() {
     return css`
       :host {
-        display: block;
+        display: inline-flex;
       }
 
-      .backgroundBox{
+      .background1{
         background-color: blue;
-        border: 8px;
-        margin: 8px;
+        padding: 8px;
+        margin: 75px;
+        display: flex;
+        align-items: center;
+      }
 
+      .background2 {
+        background-color: lightblue; 
+        padding: 150px 250px;
+        margin-bottom: -8px;
+
+      }
+
+      .AddUser{
+        border: 1px dashed black; 
+        background-color: transparent;
+        padding: 16px;
       }
 
 
@@ -34,10 +47,17 @@ import { DDD } from "@lrnwebcomponents/d-d-d/d-d-d.js";
 
   render() {
     return html`
-    <div class= "backgroundBox">
+    <div class= "wrapper">
+      <div class= "background1">
+        <div class= "background2">
+          <button class= "AddUser">Add User</button>
+
+
+        
+          </div>
         </div>
-
-
+      </div>
+    </div>
 
     
     `;
@@ -46,10 +66,10 @@ import { DDD } from "@lrnwebcomponents/d-d-d/d-d-d.js";
 
   static get properties() {
     return {
-      counter: { type: Number, reflect: true },
+      
       
     };
   }
 }
 
-globalThis.customElements.define(PartyUi.tag, PartyUi);
+globalThis.customElements.define(PartyUI.tag, PartyUI);
