@@ -1,6 +1,9 @@
-import { LitElement, html, css } from 'lit';
+import { html, css } from 'lit';
+import { DDD } from "@lrnwebcomponents/d-d-d/d-d-d.js";
+import "@lrnwebcomponents/rpg-character/rpg-character.js";
 
-export class PartyUI extends LitElement {
+
+export class PartyUI extends DDD {
 
   static get tag() {
     return 'party-ui';
@@ -8,7 +11,12 @@ export class PartyUI extends LitElement {
   
   constructor() {
     super();
+    this.items = [];
    
+  }
+
+  add(e){
+
   }
 
 
@@ -19,15 +27,18 @@ export class PartyUI extends LitElement {
       }
 
       .background1{
-        background-color: blue;
+        background-color: var(--ddd-theme-default-beaver70);
         padding: 8px;
         margin: 75px;
         display: flex;
         align-items: center;
+        flex-direction: column;
+
+        
       }
 
       .background2 {
-        background-color: lightblue; 
+        background-color: var(--ddd-theme-default-beaverBlue);
         padding: 150px 250px;
         margin-bottom: -8px;
 
@@ -36,7 +47,40 @@ export class PartyUI extends LitElement {
       .AddUser{
         border: 1px dashed black; 
         background-color: transparent;
-        padding: 16px;
+        
+        font-size: 24px;
+        font-family: var(--ddd-font-primary-bold);
+        
+        display: inline-flex;
+        flex-direction: column;
+        text-align: center;
+        margin-left: 16px;
+        
+    
+        
+      }
+
+      .characterlist{
+        
+        display: flex;
+      }
+
+      .yourname{
+        color: white;
+        font-family: var(--ddd-font-primary-bold);
+
+      }
+
+      .namespace{
+        border-top: 3px solid var(--ddd-theme-default-accent);
+        margin: 0px 18px;
+        text-align: center;
+        font-family: var(--ddd-font-primary-bold);
+      }
+      
+      .characters{
+        text-align: center; 
+
       }
 
 
@@ -50,10 +94,15 @@ export class PartyUI extends LitElement {
     <div class= "wrapper">
       <div class= "background1">
         <div class= "background2">
-          <button class= "AddUser">Add User</button>
+          <div class="characterlist">
+            <div class= "characters">
+            <rpg-character hat= "random" seed="yourcharacter"></rpg-character>
+            <div class ="yourname">YOU</div>
+            <div class="namespace"></div>
+            </div>
 
+             <button @click="${this.add}" class= "AddUser"><rpg-character></rpg-character>Add User + </button>
 
-        
           </div>
         </div>
       </div>
@@ -66,6 +115,7 @@ export class PartyUI extends LitElement {
 
   static get properties() {
     return {
+      items: { type: Array },
       
       
     };
