@@ -12,6 +12,7 @@ export class PartyUI extends DDD {
   constructor() {
     super();
     this.items = [];
+    
    
   }
 
@@ -24,6 +25,7 @@ export class PartyUI extends DDD {
     return css`
       :host {
         display: inline-flex;
+        
       }
 
       .background1{
@@ -33,6 +35,7 @@ export class PartyUI extends DDD {
         display: flex;
         align-items: center;
         flex-direction: column;
+        
 
         
       }
@@ -41,10 +44,11 @@ export class PartyUI extends DDD {
         background-color: var(--ddd-theme-default-beaverBlue);
         padding: 150px 250px;
         margin-bottom: -8px;
+        
 
       }
 
-      .AddUser{
+      .adduser{
         border: 1px dashed black; 
         background-color: transparent;
         
@@ -56,8 +60,7 @@ export class PartyUI extends DDD {
         text-align: center;
         margin-left: 16px;
         
-    
-        
+       
       }
 
       .characterlist{
@@ -83,9 +86,24 @@ export class PartyUI extends DDD {
 
       }
 
+      .adduser:hover,
+      .adduser:focus{
+        background-color: var(--ddd-theme-default-navy40);
+
+      }
+
+
 
   `;
   }
+
+
+  
+
+
+
+
+
 
   
 
@@ -101,7 +119,7 @@ export class PartyUI extends DDD {
             <div class="namespace"></div>
             </div>
 
-             <button @click="${this.add}" class= "AddUser"><rpg-character></rpg-character>Add User + </button>
+             <button @click="${this.adduser}" class= "adduser"><rpg-character></rpg-character>Add User + </button>
 
           </div>
         </div>
@@ -113,10 +131,15 @@ export class PartyUI extends DDD {
 
   }
 
+
+
+
+
+
   static get properties() {
     return {
       items: { type: Array },
-      
+            
       
     };
   }
