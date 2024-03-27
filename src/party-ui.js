@@ -11,7 +11,8 @@ export class PartyUI extends DDD {
   
   constructor() {
     super();
-    this.items = [];
+    this.characters = ["You"];
+    this.numChar = 1; 
     
    
   }
@@ -31,31 +32,31 @@ export class PartyUI extends DDD {
       .background1{
         background-color: var(--ddd-theme-default-beaver70);
         padding: 8px;
-        margin: 75px;
+        //margin: 75px;
         display: flex;
         align-items: center;
-        flex-direction: column;
-        
-
-        
+        //flex-direction: column;
+       
       }
 
       .background2 {
         background-color: var(--ddd-theme-default-beaverBlue);
-        padding: 150px 250px;
+        padding: 100px 100px;
         margin-bottom: -8px;
+        flex-direction: row;
+
         
 
       }
 
-      .adduser{
-        border: 1px dashed black; 
+      .userlist{
+       // border: 1px dashed black; 
         background-color: transparent;
         
         font-size: 24px;
         font-family: var(--ddd-font-primary-bold);
         
-        display: inline-flex;
+        display: flex;
         flex-direction: column;
         text-align: center;
         margin-left: 16px;
@@ -66,11 +67,12 @@ export class PartyUI extends DDD {
       .characterlist{
         
         display: flex;
+    
       }
 
       .yourname{
         color: white;
-        font-family: var(--ddd-font-primary-bold);
+        font-family: "Press Start 2P", system-ui;
 
       }
 
@@ -78,7 +80,7 @@ export class PartyUI extends DDD {
         border-top: 3px solid var(--ddd-theme-default-accent);
         margin: 0px 18px;
         text-align: center;
-        font-family: var(--ddd-font-primary-bold);
+        font-family: "Press Start 2P", system-ui;
       }
       
       .characters{
@@ -86,11 +88,64 @@ export class PartyUI extends DDD {
 
       }
 
-      .adduser:hover,
+       .adduser:hover,
       .adduser:focus{
         background-color: var(--ddd-theme-default-navy40);
 
+      } 
+
+      .adduser{
+        background-color: transparent;
+        border: dashed 3px;
+        font-size: 28px;
+        font-family: "Press Start 2P", system-ui;
+        margin: 16px;
+        padding: 16px;
+        display: flex;
+        align-items: center;
+       
       }
+
+      .removeuser{
+        // padding: 16px;
+        font-size: 18px; 
+        font-family: "Press Start 2P", system-ui;
+        background-color: var(--ddd-theme-default-accent);
+
+      }
+      .saveuser{
+        // padding: 16px;
+        font-size: 18px; 
+        font-family: "Press Start 2P", system-ui;
+        background-color: var(--ddd-theme-default-accent);
+
+      }
+
+      .namebox{
+        // padding: 16px;
+        font-size: 24px; 
+        font-family: "Press Start 2P", system-ui;
+        background-color: var(--ddd-theme-default-slateLight);
+
+      }
+      
+ 
+       .numchar{
+        border: white 3px;
+        margin: 6px;
+        display: flex;
+
+      } 
+
+      .saveuserbig{
+        // padding: 16px;
+        font-size: 18px; 
+        font-family: "Press Start 2P", system-ui;
+        background-color: var(--ddd-theme-default-roarGolden);
+
+      } 
+
+      
 
 
 
@@ -98,12 +153,60 @@ export class PartyUI extends DDD {
   }
 
 
+
+  makeItRain() {
+    // this is called a dynamic import. It means it won't import the code for confetti until this method is called
+    // the .then() syntax after is because dynamic imports return a Promise object. Meaning the then() code
+    // will only run AFTER the code is imported and available to us
+    import("@lrnwebcomponents/multiple-choice/lib/confetti-container.js").then(
+      (module) => {
+        // This is a minor timing 'hack'. We know the code library above will import prior to this running
+        // The "set timeout 0" means "wait 1 microtask and run it on the next cycle.
+        // this "hack" ensures the element has had time to process in the DOM so that when we set popped
+        // it's listening for changes so it can react
+        setTimeout(() => {
+          // forcibly set the poppped attribute on something with id confetti
+          // while I've said in general NOT to do this, the confetti container element will reset this
+          // after the animation runs so it's a simple way to generate the effect over and over again
+          this.shadowRoot.querySelector("#confetti").setAttribute("popped", "");
+        }, 0);
+      }
+    );
+  }
+
+
+  add(e) {
+    if (this.numChar < 4) {
+      this.characters.push("");
+      this.numChar++;
+      this.requestUpdate(); 
+    } 
+  }
+
+  remove(index) {
+    if (this.numChar > 1) {
+      this.characters.splice(index, 1); 
+      this.numChar--;
+      this.requestUpdate(); 
+    } 
+  }
+
+  saveName(e, index) {
+    const newName = e.target.value.toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (newName.trim() !== "") {
+      this.characters[index] = newName;
+    } else {
+      this.characters[index] = "ENTER";
+    }
+    this.requestUpdate();
+  }
+
+
+  saveUsers(){
+    const names = this.characters.filter(name => name.trim() !=="");
+    console.log(names);
+  }
   
-
-
-
-
-
 
   
 
@@ -111,18 +214,31 @@ export class PartyUI extends DDD {
     return html`
     <div class= "wrapper">
       <div class= "background1">
+      <confetti-container id="confetti">  
         <div class= "background2">
           <div class="characterlist">
-            <div class= "characters">
-            <rpg-character hat= "random" seed="yourcharacter"></rpg-character>
-            <div class ="yourname">YOU</div>
-            <div class="namespace"></div>
+             ${this.characters.map((player, index) => html`
+              <div class= "characters">
+                <div class="character-wrapper">
+                  <rpg-character seed="${player}"></rpg-character>
+                </div>
+                <input type="text" class="namebox" .value="${player || 'ENTER'}" @change="${(e) => this.saveName(e, index)}">
+                <div class="btn">
+                  ${index > 0 ? html`
+                      <button @click="${() => this.saveName(index, this.shadowRoot.querySelector(`#name-${index}`).value)}" class="saveuser">SAVE</button>
+                      <button @click="${() => this.remove(index)}" class="removeuser">REMOVE</button>
+                      ` : ''}
+                  </div>
+                </div>
+              `)}
+              <div class= "addbtn"></div> 
+              <button @click="${this.add}" class="adduser"><rpg-character></rpg-character>Add User</button>
+              <div class="numchar">${this.numChar}/4 <br> Added</div>
             </div>
-
-             <button @click="${this.adduser}" class= "adduser"><rpg-character></rpg-character>Add User + </button>
-
-          </div>
+          <button @click="${this.makeItRain}" class="saveuserbig" >SAVE USER</button>
         </div>
+        </div>
+      </confetti-container>
       </div>
     </div>
 
@@ -139,6 +255,7 @@ export class PartyUI extends DDD {
   static get properties() {
     return {
       items: { type: Array },
+      numChar: { type: Number, reflext: true},
             
       
     };
