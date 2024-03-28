@@ -36,7 +36,6 @@ export class PartyUI extends DDD {
         display: flex;
         align-items: center;
         //flex-direction: column;
-       
       }
 
       .background2 {
@@ -44,8 +43,6 @@ export class PartyUI extends DDD {
         padding: 100px 100px;
         margin-bottom: -8px;
         flex-direction: row;
-
-        
 
       }
 
@@ -107,14 +104,15 @@ export class PartyUI extends DDD {
       }
 
       .removeuser{
-        // padding: 16px;
+        //padding: 16px;
+        margin: 16px;
         font-size: 18px; 
         font-family: "Press Start 2P", system-ui;
         background-color: var(--ddd-theme-default-accent);
 
       }
       .saveuser{
-        // padding: 16px;
+      
         font-size: 18px; 
         font-family: "Press Start 2P", system-ui;
         background-color: var(--ddd-theme-default-accent);
@@ -122,18 +120,20 @@ export class PartyUI extends DDD {
       }
 
       .namebox{
-        // padding: 16px;
+        padding: 4px;
         font-size: 24px; 
         font-family: "Press Start 2P", system-ui;
         background-color: var(--ddd-theme-default-slateLight);
+        width: 350px;
+        
 
       }
       
- 
        .numchar{
         border: white 3px;
         margin: 6px;
         display: flex;
+        text-align: center;
 
       } 
 
@@ -144,9 +144,6 @@ export class PartyUI extends DDD {
         background-color: var(--ddd-theme-default-roarGolden);
 
       } 
-
-      
-
 
 
   `;
@@ -176,7 +173,7 @@ export class PartyUI extends DDD {
 
 
   add(e) {
-    if (this.numChar < 4) {
+    if (this.numChar < 50) {
       this.characters.push("");
       this.numChar++;
       this.requestUpdate(); 
@@ -192,6 +189,7 @@ export class PartyUI extends DDD {
   }
 
   saveName(e, index) {
+    console.log(this.characters);
     const newName = e.target.value.toLowerCase().replace(/[^a-z0-9]/g, '');
     if (newName.trim() !== "") {
       this.characters[index] = newName;
@@ -233,7 +231,7 @@ export class PartyUI extends DDD {
               `)}
               <div class= "addbtn"></div> 
               <button @click="${this.add}" class="adduser"><rpg-character></rpg-character>Add User</button>
-              <div class="numchar">${this.numChar}/4 <br> Added</div>
+              <div class="numchar">${this.numChar - 1} <br> Added</div>
             </div>
           <button @click="${this.makeItRain}" class="saveuserbig" >SAVE USER</button>
         </div>
@@ -246,10 +244,6 @@ export class PartyUI extends DDD {
     `;
 
   }
-
-
-
-
 
 
   static get properties() {
