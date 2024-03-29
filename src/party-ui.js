@@ -31,8 +31,8 @@ export class PartyUI extends DDD {
 
       .background1{
         background-color: var(--ddd-theme-default-beaver70);
-        padding: 8px;
-        //margin: 75px;
+        padding: var(--ddd-spacing-2);
+        margin:  var(--ddd-spacing-18);
         display: flex;
         align-items: center;
         //flex-direction: column;
@@ -56,7 +56,8 @@ export class PartyUI extends DDD {
         display: flex;
         flex-direction: column;
         text-align: center;
-        margin-left: 16px;
+        margin-left: var(--ddd-spacing-4);
+       // margin-left: var(--ddd-spacing-m-4);
         
        
       }
@@ -96,16 +97,17 @@ export class PartyUI extends DDD {
         border: dashed 3px;
         font-size: 28px;
         font-family: "Press Start 2P", system-ui;
-        margin: 16px;
-        padding: 16px;
+        margin: var(--ddd-spacing-4);
+        padding: var(--ddd-spacing-4);
         display: flex;
         align-items: center;
+
        
       }
 
       .removeuser{
         //padding: 16px;
-        margin: 16px;
+        margin: var(--ddd-spacing-4);
         font-size: 18px; 
         font-family: "Press Start 2P", system-ui;
         background-color: var(--ddd-theme-default-accent);
@@ -120,7 +122,7 @@ export class PartyUI extends DDD {
       }
 
       .namebox{
-        padding: 4px;
+        padding: var(--ddd-spacing-1);
         font-size: 24px; 
         font-family: "Press Start 2P", system-ui;
         background-color: var(--ddd-theme-default-slateLight);
@@ -167,6 +169,7 @@ export class PartyUI extends DDD {
           // after the animation runs so it's a simple way to generate the effect over and over again
           this.shadowRoot.querySelector("#confetti").setAttribute("popped", "");
         }, 0);
+        alert('Saved!');
       }
     );
   }
@@ -204,6 +207,8 @@ export class PartyUI extends DDD {
     const names = this.characters.filter(name => name.trim() !=="");
     console.log(names);
   }
+
+ 
   
 
   
