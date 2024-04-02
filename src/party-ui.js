@@ -13,6 +13,7 @@ export class PartyUI extends DDD {
     super();
     this.characters = ["You"];
     this.numChar = 1; 
+    this.message="";
     
    
   }
@@ -65,6 +66,8 @@ export class PartyUI extends DDD {
       .characterlist{
         
         display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
     
       }
 
@@ -144,6 +147,7 @@ export class PartyUI extends DDD {
         font-size: 18px; 
         font-family: "Press Start 2P", system-ui;
         background-color: var(--ddd-theme-default-roarGolden);
+        //color: white;
 
       } 
 
@@ -154,6 +158,8 @@ export class PartyUI extends DDD {
 
 
   makeItRain() {
+
+
     // this is called a dynamic import. It means it won't import the code for confetti until this method is called
     // the .then() syntax after is because dynamic imports return a Promise object. Meaning the then() code
     // will only run AFTER the code is imported and available to us
@@ -169,17 +175,18 @@ export class PartyUI extends DDD {
           // after the animation runs so it's a simple way to generate the effect over and over again
           this.shadowRoot.querySelector("#confetti").setAttribute("popped", "");
         }, 0);
-        alert('Saved!');
+        alert(this.message="Party members "+this.characters+ " Added/Saved!"); //new trying to see the characters who are added
       }
     );
   }
 
 
   add(e) {
-    if (this.numChar < 50) {
+    if (this.numChar < 5) {
       this.characters.push("");
       this.numChar++;
       this.requestUpdate(); 
+      console.log(this.characters); //new
     } 
   }
 
@@ -206,10 +213,9 @@ export class PartyUI extends DDD {
   saveUsers(){
     const names = this.characters.filter(name => name.trim() !=="");
     console.log(names);
+
   }
 
- 
-  
 
   
 
@@ -239,6 +245,7 @@ export class PartyUI extends DDD {
               <div class="numchar">${this.numChar - 1} <br> Added</div>
             </div>
           <button @click="${this.makeItRain}" class="saveuserbig" >SAVE USER</button>
+          <p> ${this.message} </p>
         </div>
         </div>
       </confetti-container>
@@ -253,8 +260,9 @@ export class PartyUI extends DDD {
 
   static get properties() {
     return {
-      items: { type: Array },
+      characters: { type: Array },
       numChar: { type: Number, reflext: true},
+      message:{type:String,reflect:true},
             
       
     };
