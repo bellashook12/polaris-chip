@@ -3,26 +3,22 @@ import { DDD } from "@lrnwebcomponents/d-d-d/d-d-d.js";
 import "@lrnwebcomponents/rpg-character/rpg-character.js";
 
 
-export class PartyUI extends DDD {
+export class HaxcmsPartyUI extends DDD {
 
   static get tag() {
-    return 'party-ui';
+    return 'haxcms-party-ui';
   }
   
   constructor() {
     super();
-    this.characters = ["You"];
-    this.numChar = 1; 
-    this.message="";
-    
-   
+    this.characters = ["You"];  //array 
+    this.numChar = 1; //number of characters 
+    this.message=" ";   
   }
 
   add(e){
 
   }
-
-
   static get styles() {
     return css`
       :host {
@@ -151,10 +147,16 @@ export class PartyUI extends DDD {
 
       } 
 
+      p {
+        color: white;
+        font-family: "Press Start 2P", system-ui;
+        font-size: 24px; 
+
+      }
+
 
   `;
   }
-
 
 
   makeItRain() {
@@ -175,21 +177,22 @@ export class PartyUI extends DDD {
           // after the animation runs so it's a simple way to generate the effect over and over again
           this.shadowRoot.querySelector("#confetti").setAttribute("popped", "");
         }, 0);
-        alert(this.message="Party members "+this.characters+ " Added/Saved!"); //new trying to see the characters who are added
+        alert(this.message="Party members "+this.characters+ " Added/Saved!"); //alert message will pop up with names and saved 
       }
     );
   }
 
-
+//adds a character but only adds 4 - 5 in all 
   add(e) {
     if (this.numChar < 5) {
       this.characters.push("");
       this.numChar++;
       this.requestUpdate(); 
-      console.log(this.characters); //new
+      console.log(this.characters); //logs the characters array 
     } 
   }
 
+  //removes a character but only the ones that were added not you
   remove(index) {
     if (this.numChar > 1) {
       this.characters.splice(index, 1); 
@@ -198,6 +201,8 @@ export class PartyUI extends DDD {
     } 
   }
 
+
+  //saving the name of a character only lowercase and numbers 
   saveName(e, index) {
     console.log(this.characters);
     const newName = e.target.value.toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -208,16 +213,6 @@ export class PartyUI extends DDD {
     }
     this.requestUpdate();
   }
-
-
-  saveUsers(){
-    const names = this.characters.filter(name => name.trim() !=="");
-    console.log(names);
-
-  }
-
-
-  
 
   render() {
     return html`
@@ -234,7 +229,7 @@ export class PartyUI extends DDD {
                 <input type="text" class="namebox" .value="${player || 'ENTER'}" @change="${(e) => this.saveName(e, index)}">
                 <div class="btn">
                   ${index > 0 ? html`
-                      <button @click="${() => this.saveName(index, this.shadowRoot.querySelector(`#name-${index}`).value)}" class="saveuser">SAVE</button>
+                      
                       <button @click="${() => this.remove(index)}" class="removeuser">REMOVE</button>
                       ` : ''}
                   </div>
@@ -257,7 +252,6 @@ export class PartyUI extends DDD {
 
   }
 
-
   static get properties() {
     return {
       characters: { type: Array },
@@ -269,4 +263,5 @@ export class PartyUI extends DDD {
   }
 }
 
-globalThis.customElements.define(PartyUI.tag, PartyUI);
+globalThis.customElements.define(HaxcmsPartyUI.tag, HaxcmsPartyUI);
+//<button @click="${() => this.saveName(index, this.shadowRoot.querySelector(`#name-${index}`).value)}" class="saveuser">SAVE</button>
