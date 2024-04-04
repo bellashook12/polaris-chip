@@ -32,7 +32,7 @@ export class HaxcmsPartyUI extends DDD {
         margin:  var(--ddd-spacing-18);
         display: flex;
         align-items: center;
-        //flex-direction: column;
+        
       }
 
       .background2 {
@@ -44,7 +44,7 @@ export class HaxcmsPartyUI extends DDD {
       }
 
       .userlist{
-       // border: 1px dashed black; 
+        
         background-color: transparent;
         
         font-size: 24px;
@@ -53,9 +53,7 @@ export class HaxcmsPartyUI extends DDD {
         display: flex;
         flex-direction: column;
         text-align: center;
-        margin-left: var(--ddd-spacing-4);
-       // margin-left: var(--ddd-spacing-m-4);
-        
+        margin-left: var(--ddd-spacing-4);      
        
       }
 
@@ -64,7 +62,6 @@ export class HaxcmsPartyUI extends DDD {
         display: flex;
         overflow-x: auto;
         overflow-y: hidden;
-    
       }
 
       .yourname{
@@ -100,12 +97,10 @@ export class HaxcmsPartyUI extends DDD {
         padding: var(--ddd-spacing-4);
         display: flex;
         align-items: center;
-
        
       }
 
       .removeuser{
-        //padding: 16px;
         margin: var(--ddd-spacing-4);
         font-size: 18px; 
         font-family: "Press Start 2P", system-ui;
@@ -139,11 +134,9 @@ export class HaxcmsPartyUI extends DDD {
       } 
 
       .saveuserbig{
-        // padding: 16px;
         font-size: 18px; 
         font-family: "Press Start 2P", system-ui;
         background-color: var(--ddd-theme-default-inventOrange);
-        //color: white;
 
       } 
 
@@ -152,8 +145,7 @@ export class HaxcmsPartyUI extends DDD {
         font-family: "Press Start 2P", system-ui;
         font-size: 24px; 
         margin-bottom: var(--ddd-spacing-14);
-        //padding: var(--ddd-spacing-7)
-
+        
       }
 
 
@@ -267,4 +259,3 @@ export class HaxcmsPartyUI extends DDD {
 }
 
 globalThis.customElements.define(HaxcmsPartyUI.tag, HaxcmsPartyUI);
-//<button @click="${() => this.saveName(index, this.shadowRoot.querySelector(`#name-${index}`).value)}" class="saveuser">SAVE</button>
