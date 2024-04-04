@@ -132,7 +132,7 @@ export class HaxcmsPartyUI extends DDD {
       
        .numchar{
         border: white 3px;
-        margin: 6px;
+        margin: var(--ddd-spacing-2);
         display: flex;
         text-align: center;
 
@@ -142,7 +142,7 @@ export class HaxcmsPartyUI extends DDD {
         // padding: 16px;
         font-size: 18px; 
         font-family: "Press Start 2P", system-ui;
-        background-color: var(--ddd-theme-default-roarGolden);
+        background-color: var(--ddd-theme-default-inventOrange);
         //color: white;
 
       } 
@@ -151,6 +151,8 @@ export class HaxcmsPartyUI extends DDD {
         color: white;
         font-family: "Press Start 2P", system-ui;
         font-size: 24px; 
+        margin-bottom: var(--ddd-spacing-14);
+        //padding: var(--ddd-spacing-7)
 
       }
 
@@ -220,6 +222,7 @@ export class HaxcmsPartyUI extends DDD {
       <div class= "background1">
       <confetti-container id="confetti">  
         <div class= "background2">
+        <p>Add up to 4 characters to your party</p>
           <div class="characterlist">
              ${this.characters.map((player, index) => html`
               <div class= "characters">
