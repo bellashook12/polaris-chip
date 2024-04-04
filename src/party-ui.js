@@ -144,7 +144,7 @@ export class HaxcmsPartyUI extends DDD {
         color: white;
         font-family: "Press Start 2P", system-ui;
         font-size: 24px; 
-        margin-bottom: var(--ddd-spacing-14);
+        margin-bottom: var(--ddd-spacing-13);
         
       }
 
@@ -215,6 +215,7 @@ export class HaxcmsPartyUI extends DDD {
       <confetti-container id="confetti">  
         <div class= "background2">
         <p>Add up to 4 characters to your party</p>
+        <p>No UPPERCASE or special characters!</p>
           <div class="characterlist">
              ${this.characters.map((player, index) => html`
               <div class= "characters">
